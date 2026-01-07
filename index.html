@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JacinthD Enterprise — Creating Heavenly Designs</title>
+  <meta name="description" content="JacinthD Enterprise — Futuristic design, trusted delivery, and customer satisfaction across graphics, brand identity, video, and tutoring." />
+
+  <!-- Favicon: matches spinning logo style -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%2300bcc4'/%3E%3Cstop offset='100%25' stop-color='%231a1a1a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ctext x='32' y='40' font-size='28' font-family='Verdana' text-anchor='middle' fill='white' letter-spacing='1'%3EJD%3C/text%3E%3C/svg%3E" />
+  
+  <!-- Font (Titles): Grandeux Serif (provide your local/hosted font and adjust the src below). Fallbacks added -->
+  <style>
+    @font-face {
+      font-family: "Grandeux Serif";
+      src: url("./fonts/GrandeuxSerif.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  
+  <!-- Icons: Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-oivFLa1uY6yU3C2wYV5C8Q8qxW3hQp5pV3Oe0a0IYyVnFfFssT8zb7J4nQ8gTqCq4v7Q3J9kC0I9rEwYvHRCmA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-bL5SxUqZC+Gm9cM0e1t3vQv2nF4d/3i0QJrH2gU4m3H5Pp8kKc7Q3P0k0Vq1rTnKJfXwD6eM7oWwJirf3a0JpQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Color System: Blend of your scheme and Outlook-like neutrals */
+    :root {
+      --primary: #00bcc4;             /* Your primary */
+      --secondary: #1a1a1a;           /* Corrected hex (#1a1a1a) */
+      --bg: #0f0f10;                  /* Dark base (Outlook-like modern dark) */
+      --bg-elev: #16181a;             /* Elevated surface */
+      --text: #e7e9ea;                /* High-contrast text */
+      --muted: #a0a6ab;               /* Muted text */
+      --accent: #2b7de9;              /* Outlook blue accent */
+      --card: #191b1e;                /* Card surface */
+      --success: #00d4a0;
+      --warning: #ffb74d;
+      --danger: #ff6b6b;
+      --shadow: 0 8px 24px rgba(0,0,0,0.22);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-lg: 20px;
+    }
+
+    /* Light theme overrides */
+    :root.light {
+      --bg: #f5f7fa;
+      --bg-elev: #ffffff;
+      --text: #141616;
+      --muted: #4b5563;
+      --card: #ffffff;
+      --shadow: 0 8px 24px rgba(29,78,216,0.12);
+    }
+
+    /* Base */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, rgba(0,0,0,0.8) 100%);
+    }
+    h1, h2, h3 {
+      font-family: "Grandeux Serif", Georgia, "Times New Roman", serif;
+      letter-spacing: 0.2px;
+      margin: 0 0 12px 0;
+    }
+    p { margin: 0 0 10px 0; color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* Layout */
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 60px 0;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev) 70%, transparent 100%);
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand .logo-wrap {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, transparent 60%);
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .brand img.logo {
+      width: 34px; height: 34px;
+      animation: spin 8s linear infinite; /* Spinning logo */
+      will-change: transform;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .brand .name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .nav-links {
+      display: none;
+      gap: 20px;
+    }
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, var(--card) 0%, var(--bg-elev) 100%);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+    .btn:active { transform: translateY(0); }
+    .icon-btn {
+      width: 42px; height: 42px; padding: 0;
+      display: grid; place-items: center;
+      border-radius: 50%;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 24px 0 12px;
+    }
+    .hero-card {
+      background: linear-gradient(180deg, var(--card) 0%, var(--bg-elev) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .tagline { font-size: 1.1rem; color: var(--primary); font-weight: 600; }
+    .traits {
+      display: flex; flex-wrap: wrap;
+      gap: 10px; margin-top: 10px;
+    }
+    .trait {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0, 188, 196, 0.12);
+      border: 1px solid rgba(0, 188, 196, 0.28);
+      color: var(--text);
+      font-size: 0.86rem;
+    }
+    .cta-row {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    }
+    .cta-primary {
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      border: none; color: white;
+    }
+    .cta-secondary {
+      background: linear-gradient(180deg, var(--bg-elev), var(--card));
+    }
+
+    /* Sections */
+    section {
+      margin-top: 28px;
+    }
+    .section-card {
+      background: linear-gradient(180deg, var(--card) 0%, var(--bg-elev) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-title { font-size: 1.36rem; }
+    .section-sub { color: var(--muted); }
+
+    /* Services Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .card {
+      background: var(--bg-elev);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.24);
+    }
+    .card-media {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+    .card-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      animation: flipX 6s ease-out infinite;
+      transform-origin: center;
+      will-change: transform, filter;
+    }
+    
+    /* Continuous left-right flip */
+    @keyframes flipX {
+      0%   { transform: scaleX(1); }
+      50%  { transform: scaleX(-1); }
+      100% { transform: scaleX(1); }
+    }
+    .card-body { padding: 14px; }
+    .card-title { font-size: 1.02rem; margin-bottom: 6px; }
+    .card-text { font-size: 0.95rem; }
+    }
+    .card-body { padding: 14px; }
+    .card-title { font-size: 1.02rem; margin-bottom: 6px; }
+    .card-text { font-size: 0.95rem; }
+
+    /* Features list */
+    .features {
+      display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px;
+    }
+    .feature {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+    }
+    .feature i { color: var(--success); margin-top: 2px; }
+
+    /* About */
+    .about-content { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+    /* Feedback */
+    .form {
+      display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px;
+    }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: var(--bg-elev);
+      color: var(--text);
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(43,125,233,0.15);
+    }
+    .textarea { min-height: 120px; resize: vertical; }
+
+    /* Contact area last */
+    .contact {
+      margin-top: 34px;
+    }
+    .contact .card-body .socials {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+    }
+    .socials a:hover {
+      border-color: rgba(0,188,196,0.55);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .socials i { color: var(--color-primary); }
+
+    / Feedback form /
+    form.feedback {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .input, textarea {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .input:focus, textarea:focus {
+      outline: 2px solid var(--outline-blue);
+      outline-offset: 3px;
+      border-color: rgba(0,188,196,0.55);
+      box-shadow: var(--shadow-md);
+    }
+    textarea { min-height: 110px; resize: vertical; }
+
+    .submit {
+      justify-self: start;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    }
+    .submit:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); filter: brightness(1.06); }
+    .submit i { margin-right: 6px; }
+
+    /* Responsive */
+    @media (min-width: 700px) {
+      .nav-links { display: flex; }
+      .hero { grid-template-columns: 1.2fr 0.8fr; }
+      .about-content { grid-template-columns: 1.2fr 0.8fr; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .features { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 980px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Micro-interactions: ripple on buttons */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(255,255,255,0.18), transparent 30%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .btn:hover::after { opacity: 1; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo-wrap">
+          <!-- Spinning logos (use your files: images-logo-1.png, images-logo-2.png, ...) -->
+          <img class="logo" src="-images-images-logo-1.png" alt="JacinthD Enterprise logo" />
+        </div>
+        <div class="name">JacinthD Enterprise</div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#about" class="animate__animated animate__fadeInUp" data-i18n="nav_about">About</a>
+        <a href="#services" class="animate__animated animate__fadeInUp" data-i18n="nav_services">Services</a>
+        <a href="#contact" class="animate__animated animate__fadeInUp" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="langBtn" class="btn" aria-label="Change language">
+          <i class="fa-solid fa-globe"></i>
+          <span data-i18n="lang">Language</span>
+        </button>
+        <button id="themeBtn" class="btn icon-btn" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-card animate__animated animate__fadeIn">
+        <h1 data-i18n="brand_name">JacinthD Enterprise</h1>
+        <div class="tagline" data-i18n="tagline">Creating Heavenly Designs</div>
+        <div class="traits">
+          <span class="trait" data-i18n="trait_futuristic">Futuristic</span>
+          <span class="trait" data-i18n="trait_satisfaction">Customer Satisfaction</span>
+          <span class="trait" data-i18n="trait_trusted">Trusted</span>
+        </div>
+        <div class="cta-row">
+          <a href="#services" class="btn cta-primary" data-i18n="cta_view_services">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            View Services
+          </a>
+          <a href="#contact" class="btn cta-secondary" data-i18n="cta_contact_us">
+            <i class="fa-solid fa-phone-volume"></i>
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+      <div class="section-card animate__animated animate__fadeIn">
+        <div class="section-header">
+          <h3 class="section-title" data-i18n="usp_title">Why Choose Us</h3>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <i class="fa-solid fa-check-circle"></i>
+            <div>
+              <strong data-i18n="usp1_title">Tailored Brand Identity</strong>
+              <p data-i18n="usp1_desc">We craft cohesive logos, palettes, and guidelines aligned to your audience and goals.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-check-circle"></i>
+            <div>
+              <strong data-i18n="usp2_title">High-impact Visuals</strong>
+              <p data-i18n="usp2_desc">Graphic designs optimized for social, print, and web that convert and delight.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-check-circle"></i>
+            <div>
+              <strong data-i18n="usp3_title">Pro Video Editing & Dev</strong>
+              <p data-i18n="usp3_desc">End-to-end editing, motion graphics, and media development for futuristic storytelling.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-check-circle"></i>
+            <div>
+              <strong data-i18n="usp4_title">Tutoring That Elevates</strong>
+              <p data-i18n="usp4_desc">Practical, project-based training that builds confidence and industry-ready skills.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-check-circle"></i>
+            <div>
+              <strong data-i18n="usp5_title">On-time, Trusted Delivery</strong>
+              <p data-i18n="usp5_desc">Clear timelines, responsive communication, and satisfaction-first revisions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section-card animate__animated animate__fadeInUp">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="about_title">About JacinthD Enterprise</h2>
+        <span class="section-sub" data-i18n="about_sub">Designing the future with trust and satisfaction at heart.</span>
+      </div>
+      <div class="about-content">
+        <div>
+          <p data-i18n="about_p1">
+            We are a creative studio blending futuristic aesthetics with customer-first delivery. From brand identity systems to eye-catching graphics and compelling video, we build experiences that feel heavenly and perform in the real world.
+          </p>
+          <p data-i18n="about_p2">
+            Our approach is simple: listen deeply, design intentionally, and iterate with you. Trusted by clients across industries, we deliver clarity, cohesion, and designs that move people.
+          </p>
+        </div>
+        <div>
+          <div class="grid">
+            <div class="card">
+              <div class="card-media">
+                <img src="-images-images-logo-1.png" alt="Spinning brand logo" style="animation: spin 8s linear infinite, flipX 5s ease-out infinite;" />
+              </div>
+              <div class="card-body">
+                <div class="card-title" data-i18n="about_card_title">Our Identity</div>
+                <p data-i18n="about_card_desc">Rooted in purpose, lifted by innovation, grounded in trust.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-media">
+                <img src="images-logo-3.png" alt="Creative emblem" />
+              </div>
+              <div class="card-body">
+                <div class="card-title" data-i18n="about_card_title2">Our Promise</div>
+                <p data-i18n="about_card_desc2">Satisfaction-first delivery with on-time iterations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section-card animate__animated animate__fadeInUp">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="services_title">Products & Services</h2>
+        <span class="section-sub" data-i18n="services_sub">From concept to delivery and tutoring.</span>
+      </div>
+
+      <div class="grid">
+        <!-- Graphic Designs -->
+        <div class="card">
+          <div class="card-media">
+            <img src="images-services-graphic-design.jpg" alt="Graphic Designs" />
+          </div>
+          <div class="card-body">
+            <div class="card-title" data-i18n="svc_graphic_title">Graphic Designs</div>
+            <p data-i18n="svc_graphic_desc">Posters, flyers, social content, and print-ready layouts.</p>
+          </div>
+        </div>
+
+        <!-- Brand Identity -->
+        <div class="card">
+          <div class="card-media">
+            <img src="images-services-brand-identity.jpg" alt="Brand Identity" />
+          </div>
+          <div class="card-body">
+            <div class="card-title" data-i18n="svc_brand_title">Brand Identity</div>
+            <p data-i18n="svc_brand_desc">Logos, color systems, typography, and complete guidelines.</p>
+          </div>
+        </div>
+
+        <!-- Video Editing & Development -->
+        <div class="card">
+          <div class="card-media">
+            <img src="images-services-video-editing.jpg" alt="Video Editing & Development" />
+          </div>
+          <div class="card-body">
+            <div class="card-title" data-i18n="svc_video_title">Video Editing & Development</div>
+            <p data-i18n="svc_video_desc">Editing, motion graphics, sound, and delivery across platforms.</p>
+          </div>
+        </div>
+
+        <!-- Graphic Design Tutoring -->
+        <div class="card">
+          <div class="card-media">
+            <img src="images-services-tutoring.jpg" alt="Graphic Design Tutoring" />
+          </div>
+          <div class="card-body">
+            <div class="card-title" data-i18n="svc_tutor_title">Graphic Design Tutoring</div>
+            <p data-i18n="svc_tutor_desc">Project-based learning to master tools and creative workflows.</p>
+          </div>
+        </div>
+
+        <!-- And More -->
+        <div class="card">
+          <div class="card-media">
+            <img src="images-services-more.jpg" alt="And More" />
+          </div>
+          <div class="card-body">
+            <div class="card-title" data-i18n="svc_more_title">And More</div>
+            <p data-i18n="svc_more_desc">Custom requests, consultations, and specialized design solutions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section id="features" class="mt-6">
+      <div class="section-head">
+        <h2 data-i18n="featuresTitle">Why choose us</h2>
+        <p data-i18n="featuresKicker">Unique selling points rooted in our services.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature animateanimated animatefadeInUp">
+          <i class="fa-solid fa-bolt"></i>
+          <div>
+            <h4 data-i18n="featSpeed">Fast, platform-ready delivery</h4>
+            <p data-i18n="featSpeedText">Optimized assets and videos tailored to each channel’s specs.</p>
+          </div>
+        </div>
+        <div class="feature animateanimated animatefadeInUp">
+          <i class="fa-solid fa-cubes"></i>
+          <div>
+            <h4 data-i18n="featCohesion">Cohesive brand systems</h4>
+            <p data-i18n="featCohesionText">Logos, colors, and guidelines that scale across your ecosystem.</p>
+          </div>
+        </div>
+        <div class="feature animateanimated animatefadeInUp">
+          <i class="fa-solid fa-hands-holding"></i>
+          <div>
+            <h4 data-i18n="featSupport">Customer-first collaboration</h4>
+            <p data-i18n="featSupportText">Clear milestones, feedback loops, and dependable communication.</p>
+          </div>
+        </div>
+        <div class="feature animateanimated animatefadeInUp">
+          <i class="fa-solid fa-brain"></i>
+          <div>
+            <h4 data-i18n="featTutoring">Empowering tutoring</h4>
+            <p data-i18n="featTutoringText">Learn the craft with practical sessions and reusable resources.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact (last) -->
+    <section id="contact" class="contact mt-6">
+      <div class="section-head">
+        <h2><i class="fa-solid fa-headset" style="color: var(--color-primary);"></i> <span data-i18n="contactTitle">Contact us</span></h2>
+        <p data-i18n="contactKicker">Reach out for projects, collaborations, or tutoring.</p>
+      </div>
+
+      <article class="card animateanimated animatefadeInUp">
+        <div class="card-body">
+          <div class="socials">
+            <a href="mailto:jacinthdenterprise@gmail.com" target="_blank" rel="noopener">
+              <i class="fa-solid fa-envelope"></i>
+              <span>jacinthdenterprise@gmail.com</span>
+            </a>
+            <a href="tel:+2349044596962">
+              <i class="fa-solid fa-phone"></i>
+              <span>+234 904 459 6962</span>
+            </a>
+            <a href="https://www.instagram.com/jacinthdgraphics?igsh=MWNyd3hzcndrMmxsNg==" target="blank" rel="noopener">
+              <i class="fa-brands fa-instagram"></i>
+              <span>@jacinthd_graphics</span>
+            </a>
+            <a href="https://www.facebook.com/JacinthD.Graphics?mibextid=ZbWKwL" target="_blank" rel="noopener">
+              <i class="fa-brands fa-facebook"></i>
+              <span>JacinthD.Graphics</span>
+            </a>
+          </div>
+
+          <!-- Feedback form -->
+          <form class="feedback" id="feedbackForm">
+            <label for="email" class="mb-2"><strong>Email</strong></label>
+            <input class="input" type="email" id="email" name="email" placeholder="your@email.com" required />
+
+            <label for="message" class="mb-2"><strong>Feedback</strong></label>
+            <textarea id="message" name="message" placeholder="Share your thoughts..." required></textarea>
+
+            <button class="submit" type="submit">
+              <i class="fa-solid fa-paper-plane"></i><span data-i18n="sendFeedback">Send feedback</span>
+            </button>
+            <small id="feedbackNote" style="color: var(--color-muted); display: block;"></small>
+          </form>
+        </div>
+      </article>
+    </section>
+  </main>
+  
+  <footer>
+    © <span id="year"></span> JacinthD Enterprise — <span data-i18n="footerTagline">Creating Heavenly Designs</span>
+  </footer>
+
+  <script>
+    // Persistent theme
+    const body = document.body;
+    const toggleThemeBtn = document.getElementById('toggleTheme');
+    const savedTheme = localStorage.getItem('theme') || 'theme-dark';
+    body.className = savedTheme;
+    toggleThemeBtn.addEventListener('click', () => {
+      const next = body.classList.contains('theme-light') ? 'theme-dark' : 'theme-light';
+      body.className = next;
+      localStorage.setItem('theme', next);
+    });
+
+    // Full-screen loader: hide after content is ready
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+      setTimeout(() => loader.classList.add('hide'), 400);
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple i18n dictionary
+    const translations = {
+      en: {
+        tagline: "Creating Heavenly Designs",
+        themeToggle: "Theme",
+        heroTitle: "Designs that feel futuristic and look divine.",
+        heroSub: "We blend innovation with customer-first service—trusted results, every single time.",
+        traitFuturistic: "Futuristic",
+        traitSatisfaction: "Customer Satisfaction",
+        traitTrusted: "Trusted",
+        aboutTitle: "About JacinthD Enterprise",
+        aboutKicker: "Creating Heavenly Designs with a futuristic edge.",
+        aboutMissionTitle: "Our mission",
+        aboutMissionText: "We craft standout brand identities, graphics, and video experiences that elevate your presence across platforms.",
+        aboutValuesTitle: "What sets us apart",
+        aboutValuesText: "Precision, speed, and clarity—paired with hands-on tutoring to empower you or your team.",
+        servicesTitle: "Our services",
+        servicesKicker: "From brand identity to video editing, we’ve got you covered.",
+        svcGraphic: "Graphic Designs",
+        svcGraphicText: "High-impact visuals for print, social, and web—optimized for clarity and conversion.",
+        svcBrand: "Brand identity",
+        svcBrandText: "Cohesive logos, color systems, and guidelines to build a distinct, memorable presence.",
+        svcVideo: "Video Editing & Development",
+        svcVideoText: "Story-driven edits, motion graphics, and platform-ready formats for maximum reach.",
+        svcTutoring: "Graphic Design Tutoring",
+        svcTutoringText: "Practical sessions from fundamentals to advanced workflows—tailored to your pace.",
+        svcMore: "And more",
+        svcMoreText: "Templates, social kits, and campaign assets—configured to your brand system.",
+        featuresTitle: "Why choose us",
+        featuresKicker: "Unique selling points rooted in our services.",
+        featSpeed: "Fast, platform-ready delivery",
+        featSpeedText: "Optimized assets and videos tailored to each channel’s specs.",
+        featCohesion: "Cohesive brand systems",
+        featCohesionText: "Logos, colors, and guidelines that scale across your ecosystem.",
+        featSupport: "Customer-first collaboration",
+        featSupportText: "Clear milestones, feedback loops, and dependable communication.",
+        featTutoring: "Empowering tutoring",
+        featTutoringText: "Learn the craft with practical sessions and reusable resources.",
+        contactTitle: "Contact us",
+        contactKicker: "Reach out for projects, collaborations, or tutoring.",
+        sendFeedback: "Send feedback",
+        footerTagline: "Creating Heavenly Designs"
+      },
+      ig: {
+        tagline: "Ịmepụta imewe si n’eluigwe",
+        themeToggle: "Isiokwu",
+        heroTitle: "Imewe dị ọhụrụ ma maa mma dị ka nke eluigwe.",
+        heroSub: "Anyị na-ejikọta ọhụụ na ọrụ ahịa—nsonaazụ a pụrụ ịtụkwasị obi mgbe niile.",
+        traitFuturistic: "Ọ dị ọhụrụ (Futuristic)",
+        traitSatisfaction: "Nkọwapụta ndị ahịa",
+        traitTrusted: "A pụrụ ịtụkwasị obi",
+        aboutTitle: "Gbasara JacinthD Enterprise",
+        aboutKicker: "Ịmepụta imewe si n’eluigwe na mgbakwunye ọhụụ.",
+        aboutMissionTitle: "Ebumnuche anyị",
+        aboutMissionText: "Anyị na-emepụta akara ika, eserese, na vidiyo nke na-eme ka ị pụta ìhè n’ụzọ niile.",
+        aboutValuesTitle: "Ihe na-eme ka anyị dị iche",
+        aboutValuesText: "Nkọwa ziri ezi, ọsọ ọsọ, na nghọta—na mmụta bara uru iji nyere gị ma ọ bụ otu gị aka.",
+        servicesTitle: "Ọrụ anyị",
+        servicesKicker: "Site na akara ika ruo ndezi vidiyo, anyị nọ ebe a maka gị.",
+        svcGraphic: "Eserese (Graphic Designs)",
+        svcGraphicText: "Eserese nwere mmetụta maka mbiprint, mmekọrịta ọha na eze, na weebụ.",
+        svcBrand: "Akara ika (Brand Identity)",
+        svcBrandText: "Logo, agba, na nduzi jikọtara ọnụ maka icheta.",
+        svcVideo: "Ndezi & Mmepe Vidiyo",
+        svcVideoText: "Nkọwa akụkọ, mgbago mmegharị, na ụdị dị mma maka ikpo okwu.",
+        svcTutoring: "Nkuzi imewe eserese",
+        svcTutoringText: "Mmụta bara uru site na ntọala ruo ọrụ dị elu—dabara na ọsọ gị.",
+        svcMore: "Na ndị ọzọ",
+        svcMoreText: "Ụdị, akụrụngwa mgbasa ozi, na ihe mgbasa ozi maka ụlọ ọrụ gị.",
+        featuresTitle: "Gịnị kpatara ịhọrọ anyị",
+        featuresKicker: "Uru pụrụ iche dabere na ọrụ anyị.",
+        featSpeed: "Mbupu ngwa ngwa",
+        featSpeedText: "A haziri ihe oyiyi na vidiyo dabere na nkọwapụta ikpo okwu.",
+        featCohesion: "Sistemụ ika jikọtara",
+        featCohesionText: "Logo na agba na-agbasakarị n’usoro gị.",
+        featSupport: "Mmekọrịta ndị ahịa mbụ",
+        featSupportText: "Mkpakọrịta doro anya na nzaghachi mgbe niile.",
+        featTutoring: "Nkuzi na-akwalite",
+        featTutoringText: "Mụta ọrụ ahụ site na mmụta bara uru.",
+        contactTitle: "Kpọtụrụ anyị",
+        contactKicker: "Kpọọ maka oru ngo, mmekọrịta, ma ọ bụ nkuzi.",
+        sendFeedback: "Zipu nzaghachi",
+        footerTagline: "Ịmepụta imewe si n’eluigwe"
+      },
+      es: {
+        tagline: "Creando diseños celestiales",
+        themeToggle: "Tema",
+        heroTitle: "Diseños futuristas con un toque divino.",
+        heroSub: "Combinamos innovación con atención al cliente—resultados confiables siempre.",
+        traitFuturistic: "Futurista",
+        traitSatisfaction: "Satisfacción del cliente",
+        traitTrusted: "Confiable",
+        aboutTitle: "Sobre JacinthD Enterprise",
+        aboutKicker: "Creando diseños celestiales con un enfoque futurista.",
+        aboutMissionTitle: "Nuestra misión",
+        aboutMissionText: "Creamos identidades de marca, gráficos y experiencias de video que elevan tu presencia.",
+        aboutValuesTitle: "Lo que nos diferencia",
+        aboutValuesText: "Precisión, rapidez y claridad—junto con tutorías prácticas para empoderarte.",
+        servicesTitle: "Nuestros servicios",
+        servicesKicker: "De identidad de marca a edición de video, te cubrimos.",
+        svcGraphic: "Diseños gráficos",
+        svcGraphicText: "Visuales de alto impacto para impresión, redes y web.",
+        svcBrand: "Identidad de marca",
+        svcBrandText: "Logotipos, paletas y guías cohesivas para una presencia memorable.",
+        svcVideo: "Edición y desarrollo de video",
+        svcVideoText: "Ediciones con narrativa, motion graphics y formatos listos para plataformas.",
+        svcTutoring: "Tutoría de diseño gráfico",
+        svcTutoringText: "Sesiones prácticas desde lo básico a flujos avanzados.",
+        svcMore: "Y más",
+        svcMoreText: "Plantillas, kits sociales y recursos para campañas.",
+        featuresTitle: "Por qué elegirnos",
+        featuresKicker: "Puntos de venta únicos basados en nuestros servicios.",
+        featSpeed: "Entrega rápida y lista para plataformas",
+        featSpeedText: "Activos optimizados según las especificaciones de cada canal.",
+        featCohesion: "Sistemas de marca cohesivos",
+        featCohesionText: "Logos y guías que escalan en tu ecosistema.",
+        featSupport: "Colaboración centrada en el cliente",
+        featSupportText: "Hitos claros y comunicación confiable.",
+        featTutoring: "Tutoría que empodera",
+        featTutoringText: "Aprende con sesiones prácticas y recursos reutilizables.",
+        contactTitle: "Contáctanos",
+        contactKicker: "Proyectos, colaboraciones o tutorías: escríbenos.",
+        sendFeedback: "Enviar comentarios",
+        footerTagline: "Creando diseños celestiales"
+      },
+      fr: {
+        tagline: "Créer des designs célestes",
+        themeToggle: "Thème",
+        heroTitle: "Des designs futuristes, au style divin.",
+        heroSub: "Innovation et service client—des résultats fiables à chaque fois.",
+        traitFuturistic: "Futuriste",
+        traitSatisfaction: "Satisfaction client",
+        traitTrusted: "Fiable",
+        aboutTitle: "À propos de JacinthD Enterprise",
+        aboutKicker: "Créer des designs célestes avec une touche futuriste.",
+        aboutMissionTitle: "Notre mission",
+        aboutMissionText: "Nous créons des identités de marque, des visuels et des vidéos qui vous démarquent.",
+        aboutValuesTitle: "Ce qui nous distingue",
+        aboutValuesText: "Précision, rapidité et clarté—avec des tutoriels pratiques.",
+        servicesTitle: "Nos services",
+        servicesKicker: "De l’identité de marque au montage vidéo.",
+        svcGraphic: "Designs graphiques",
+        svcGraphicText: "Visuels à fort impact pour l’impression, les réseaux et le web.",
+        svcBrand: "Identité de marque",
+        svcBrandText: "Logos, couleurs et guides cohérents.",
+        svcVideo: "Montage et développement vidéo",
+        svcVideoText: "Montage narratif, motion design, formats prêts.",
+        svcTutoring: "Tutorat en design graphique",
+        svcTutoringText: "Séances pratiques du basique à l’avancé.",
+        svcMore: "Et plus",
+        svcMoreText: "Modèles, kits sociaux et ressources de campagne.",
+        featuresTitle: "Pourquoi nous choisir",
+        featuresKicker: "Des atouts uniques issus de nos services.",
+        featSpeed: "Livraison rapide prête pour les plateformes",
+        featSpeedText: "Actifs optimisés selon chaque canal.",
+        featCohesion: "Systèmes de marque cohérents",
+        featCohesionText: "Logos et guides qui s’adaptent.",
+        featSupport: "Collaboration orientée client",
+        featSupportText: "Étapes claires et communication fiable.",
+        featTutoring: "Tutorat qui vous renforce",
+        featTutoringText: "Apprentissage pratique et ressources réutilisables.",
+        contactTitle: "Contactez-nous",
+        contactKicker: "Projets, collaborations ou tutorat.",
+        sendFeedback: "Envoyer un avis",
+        footerTagline: "Créer des designs célestes"
+      },
+      de: {
+        tagline: "Himmlische Designs erschaffen",
+        themeToggle: "Thema",
+        heroTitle: "Futuristische Designs mit göttlichem Touch.",
+        heroSub: "Innovation und kundenorientierter Service—zuverlässige Ergebnisse.",
+        traitFuturistic: "Futuristisch",
+        traitSatisfaction: "Kundenzufriedenheit",
+        traitTrusted: "Vertrauenswürdig",
+        aboutTitle: "Über JacinthD Enterprise",
+        aboutKicker: "Himmlische Designs mit futuristischer Note.",
+        aboutMissionTitle: "Unsere Mission",
+        aboutMissionText: "Markenidentitäten, Grafiken und Videos, die Ihre Präsenz steigern.",
+        aboutValuesTitle: "Was uns auszeichnet",
+        aboutValuesText: "Präzision, Geschwindigkeit und Klarheit—mit praktischen Schulungen.",
+        servicesTitle: "Unsere Dienstleistungen",
+        servicesKicker: "Von Markenidentität bis Video-Editing.",
+        svcGraphic: "Grafikdesign",
+        svcGraphicText: "Wirkungsvolle Visuals für Print, Social und Web.",
+        svcBrand: "Markenidentität",
+        svcBrandText: "Logos, Farben und Richtlinien für eine starke Präsenz.",
+        svcVideo: "Video-Editing & Entwicklung",
+        svcVideoText: "Story-basierte Edits, Motion Graphics, plattformfertige Formate.",
+        svcTutoring: "Grafikdesign-Schulung",
+        svcTutoringText: "Praktische Sitzungen vom Grundkurs bis fortgeschritten.",
+        svcMore: "Und mehr",
+        svcMoreText: "Templates, Social-Kits und Kampagnen-Assets.",
+        featuresTitle: "Warum wir",
+        featuresKicker: "Einzigartige Vorteile unserer Services.",
+        featSpeed: "Schnelle, plattformfertige Lieferung",
+        featSpeedText: "Optimierte Assets für jeden Kanal.",
+        featCohesion: "Stimmige Marken-Systeme",
+        featCohesionText: "Logos und Richtlinien, die skalieren.",
+        featSupport: "Kundenorientierte Zusammenarbeit",
+        featSupportText: "Klare Meilensteine, verlässliche Kommunikation.",
+        featTutoring: "Stärkende Schulung",
+        featTutoringText: "Praktisches Lernen mit wiederverwendbaren Ressourcen.",
+        contactTitle: "Kontakt",
+        contactKicker: "Projekte, Zusammenarbeit oder Schulung.",
+        sendFeedback: "Feedback senden",
+        footerTagline: "Himmlische Designs erschaffen"
+      }
+    };
+
+    // Language switching
+    const langSelect = document.getElementById('lang');
+    const applyTranslations = (lng) => {
+      const dict = translations[lng] || translations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      localStorage.setItem('lang', lng);
+      langSelect.value = lng;
+      document.documentElement.lang = lng;
+    };
+    const savedLang = localStorage.getItem('lang') || 'en';
+    applyTranslations(savedLang);
+    langSelect.addEventListener('change', (e) => applyTranslations(e.target.value));
+
+    // Feedback form (demo-only: local echo)
+
+    const form = document.getElementById('feedbackForm');
+    const note = document.getElementById('feedbackNote');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      if (!email || !message) return;
+      note.textContent = "Thanks! Your feedback has been noted.";
+      form.reset();
+      setTimeout(() => note.textContent = "", 3500);
+    });
+  </script>
