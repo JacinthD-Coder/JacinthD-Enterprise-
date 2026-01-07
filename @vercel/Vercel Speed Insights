@@ -1,0 +1,3 @@
+pnpm i @vercel/speed-insights
+npm i @vercel/speed-insights
+yarn add @vercel/speed-insights
